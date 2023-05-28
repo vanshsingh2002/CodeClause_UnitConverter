@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../../Assets/logo.jpg"/>
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+    <title>Convert Temperature</title>
+  </head>
+  <body>
+    <div class="mainBody">
+      <!-- navabar starts -->
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../../index.html ">
+            <img class="logo" src="../../Assets/logo.jpg" alt="" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="../volume/volume.html"
+                  >Volume</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Temperature</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../length/length.html">Length</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- navabar ends -->
+
+
+            <!-- body starts -->
+            <div class="container-fluid flex flex-column">
+              <h2>Temperature Converter</h2>
+              <div class="container flex flex-column gap-3 mt-3">
+                <div class="inputArea">
+                  <form action="#">
+                    <select name="values" id="values">
+                      <option value="#">Select the unit</option>
+                      <option value="celcius">Degree Celcius</option>
+                      <option value="farenheit">Farenheit</option>
+                      <option value="kelvin">Kelvin</option>
+                    </select>
+                    <input type="number" placeholder="Enter the Value" id="ivalue" oninput="getValue()"/>
+                  </div>
+                  <!-- <button class="btn btn-outline-primary" id="cBtn">Convert</button> -->
+                </form>
+              </div>
+              <div class="conValues flex flex-column gap-5 mt-3 colo pt-5 pb-5">
+                <div class="celcius comConv flex">
+                  <label for="celcius">Degree Celcius :</label>
+                  <input type="number" id="celcius" readonly value="0">
+                </div>
+                <div class="farenheit comConv flex">
+                  <label for="farenheit">Farenheit :</label>
+                  <input type="number" id="farenheit" value="0" readonly>
+                </div>
+                <div class="kelvin comConv flex">
+                  <label for="kelvin">Kelvin :</label>
+                  <input type="number" id="kelvin" value="0" readonly>
+                </div> 
+              </div>
+            </div>
+            <!-- body ends -->
+    </div>
+  </body>
+  <script>
+    let celcius=document.querySelector('#celcius')
+    let farenheit=document.querySelector('#farenheit')
+    let kelvin=document.querySelector('#kelvin')
+    let ivalue=document.getElementById('ivalue')
+    let tSi=document.getElementById('values')
+
+    function getValue(){
+      if(tSi.value=="celcius"){
+        celcius.value=Math.round(ivalue.value).toFixed(2);
+        farenheit.value=((ivalue.value*9/5)+32).toFixed(2);
+        kelvin.value=(Number(ivalue.value)+ 273.15)
+      }
+      else if(tSi.value=="farenheit"){
+        farenheit.value=Math.round(ivalue.value).toFixed(2);
+        celcius.value=((ivalue.value -32) * 5/9).toFixed(2);
+        kelvin.value=(ivalue.value - 32 * 5/9 + 273.15 ).toFixed(2);
+      }
+      else if(tSi.value=="kelvin"){
+        kelvin.value=Math.round(ivalue.value).toFixed(2);
+        farenheit.value=((ivalue.value - 273.15) * 9/5 + 32).toFixed(2);
+        celcius.value=(ivalue.value - 273.15).toFixed(2);
+      }
+    }
+  </script>
+</html>

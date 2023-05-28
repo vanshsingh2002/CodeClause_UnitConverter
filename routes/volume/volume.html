@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../../Assets/logo.jpg" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <title>Convert Volume</title>
+    <style>
+        .comConv input[type="number"] {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mainBody">
+        <!-- navabar starts -->
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../../index.html">
+                    <img class="logo" src="../../Assets/logo.jpg" alt="" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Volume</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../temperature/temp.html">Temperature</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../length/length.html">Length</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- navabar ends -->
+
+        <!-- body starts -->
+        <div class="container-fluid flex flex-column">
+            <h2>Volume Converter</h2>
+            <div class="container flex flex-column gap-3 mt-3">
+                <div class="inputArea">
+                    <form action="#">
+                        <select name="values" id="values">
+                            <option value="#">Select the unit</option>
+                            <option value="UK_gallon">UK_gallon</option>
+                            <option value="US_gallon">US_gallon</option>
+                            <option value="litre">litre</option>
+                            <option value="mlitre">mlitre</option>
+                            <option value="Cubic_centimetres">Cubic_centimetres</option>
+                            <option value="Cubic_metres">Cubic_metres</option>
+                            <option value="Cubic_inches">Cubic inches</option>
+                            <option value="Cubic_feet">Cubic feet</option>
+                        </select>
+                        <input type="number" placeholder="Enter the Value" min="1" id="ivalue" oninput="getValue()" />
+                </div>
+                <!-- <button class="btn btn-outline-primary" id="cBtn">Convert</button> -->
+                </form>
+            </div>
+            <div class="conValues flex flex-column gap-3 mt-3 colo py-3 px-5">
+                <div class="nMiles comConv flex">
+                    <label for="UK_gallon">UK gallon :</label>
+                    <input type="number" id="UK_gallon" readonly value="0">
+                </div>
+                <div class="km comConv flex">
+                    <label for="US_gallon">US gallon :</label>
+                    <input type="number" id="US_gallon" value="0" readonly>
+                </div>
+                <div class="meter comConv flex">
+                    <label for="litre">Litre :</label>
+                    <input type="number" id="litre" value="0" readonly>
+                </div>
+                <div class="feet comConv flex">
+                    <label for="mlitre">Millilitres :</label>
+                    <input type="number" id="mlitre" value="0" readonly>
+                </div>
+                <div class="yard comConv flex">
+                    <label for="Cubic_centimetres">Cubic centimeteres :</label>
+                    <input type="number" id="Cubic_centimetres" value="0" readonly>
+                </div>
+                <div class="inch comConv flex">
+                    <label for="Cubic_metres">Cubic metres :</label>
+                    <input type="number" id="Cubic_metres" value="0" readonly>
+                </div>
+                <div class="Cubic_metres comConv flex">
+                    <label for="Cubic_inches">Cubic inch :</label>
+                    <input type="number" id="Cubic_inches" value="0" readonly>
+                </div>
+                <div class="mm comConv flex">
+                    <label for="Cubic_feet">Cubic feet :</label>
+                    <input type="number" id="Cubic_feet" value="0" readonly>
+                </div>
+            </div>
+        </div>
+        <!-- body ends -->
+
+        
+    </div>
+</body>
+<!-- <script src="../../js/index.js"></script> -->
+<script>
+    // for length calculations
+    let btn = document.getElementById("cBtn");
+    let Si = document.getElementById("values");
+    let iValue = document.querySelector('#ivalue');
+    let UK_gallon = document.querySelector('#UK_gallon');
+    let US_gallon = document.querySelector('#US_gallon');
+    let litre = document.querySelector('#litre');
+    let mlitre = document.querySelector('#mlitre');
+    let Cubic_centimetres = document.querySelector('#Cubic_centimetres');
+    let Cubic_metres = document.querySelector('#Cubic_metres');
+    let Cubic_inches = document.querySelector('#Cubic_inches');
+    let Cubic_feet = document.querySelector('#Cubic_feet');
+
+    function getValue() {
+        if (Si.value == "UK_gallon") {
+            UK_gallon.value = Math.round(iValue.value).toFixed(2);
+            US_gallon.value = (iValue.value * 1.20095).toFixed(3);
+            litre.value = (iValue.value * 4.54609).toFixed(3);
+            mlitre.value = (iValue.value * 4546.09).toFixed(3);
+            Cubic_centimetres.value = (iValue.value * 4546.09).toFixed(3);
+            Cubic_metres.value = (iValue.value * 0.00454609).toFixed(2);
+            Cubic_inches.value = (iValue.value * 277.419).toFixed(6);
+            Cubic_feet.value = (iValue.value * 0.160544).toFixed(7);
+        }
+
+        else if (Si.value == "US_gallon") {
+            US_gallon.value = Math.round(iValue.value).toFixed(2);
+            UK_gallon.value = (iValue.value / 1.20095).toFixed(3);
+            litre.value = (iValue.value * 3.78541).toFixed(3);
+            mlitre.value = (iValue.value * 3785.41).toFixed(3);
+            Cubic_centimetres.value = (iValue.value * 3785.41).toFixed(3);
+            Cubic_metres.value = (iValue.value * 0.00378541).toFixed(2);
+            Cubic_inches.value = (iValue.value * 231).toFixed(6);
+            Cubic_feet.value = (iValue.value * 0.133681).toFixed(7);
+        }
+
+        else if (Si.value == "litre") {
+            litre.value = Math.round(iValue.value).toFixed(2);
+            mlitre.value = (iValue.value * 1000).toFixed(2);
+            Cubic_centimetres.value = (iValue.value * 1000).toFixed(2);
+            Cubic_metres.value = (iValue.value / 1000).toFixed(4);
+            Cubic_inches.value = (iValue.value * 61.0237).toFixed(4);
+            Cubic_feet.value = (iValue.value / 28.3168).toFixed(4);
+            UK_gallon.value = (iValue.value / 4.54609).toFixed(4);
+            US_gallon.value = (iValue.value / 3.78541).toFixed(4);
+        }
+        else if (Si.value == "mlitre") {
+            mlitre.value = Math.round(iValue.value).toFixed(2);
+            litre.value = (iValue.value / 1000).toFixed(3);
+            Cubic_centimetres.value = (iValue.value * 1000).toFixed(2);
+            Cubic_metres.value = (iValue.value / 1000).toFixed(4);
+            Cubic_inches.value = (iValue.value * 0.0610237).toFixed(4);
+            Cubic_feet.value = (iValue.value / 28316.8466).toFixed(4);
+            UK_gallon.value = (iValue.value / 4546.09).toFixed(4);
+            US_gallon.value = (iValue.value / 3785.41).toFixed(4);
+        }
+        else if (Si.value == "Cubic_centimetres") {
+            Cubic_centimetres.value = Math.round(iValue.value).toFixed(2);
+            mlitre.value = Cubic_centimetres.value;
+            litre.value = (iValue.value / 1000).toFixed(3);
+            Cubic_metres.value = (iValue.value / 1000000).toFixed(6);
+            Cubic_inches.value = (iValue.value * 0.0610237).toFixed(4);
+            Cubic_feet.value = (iValue.value / 28316.8466).toFixed(7);
+            UK_gallon.value = (iValue.value / 454609).toFixed(5);
+            US_gallon.value = (iValue.value / 378541).toFixed(5);
+        }
+        else if (Si.value == "Cubic_metres") {
+            Cubic_metres.value = Math.round(iValue.value).toFixed(2);
+            Cubic_centimetres.value = (iValue.value * 1000000).toFixed(2);
+            litre.value = (iValue.value * 1000).toFixed(3);
+            mlitre.value = (iValue.value * 1000000).toFixed(3);
+            Cubic_inches.value = (iValue.value * 61023.7).toFixed(6);
+            Cubic_feet.value = (iValue.value * 35.3147).toFixed(7);
+            UK_gallon.value = (iValue.value * 219.969).toFixed(3);
+            US_gallon.value = (iValue.value * 264.172).toFixed(3);
+        }
+        else if (Si.value == "Cubic_inches") {
+            Cubic_inches.value = Math.round(iValue.value).toFixed(2);
+            litre.value = (iValue.value * 0.0163871).toFixed(3);
+            mlitre.value = (iValue.value * 16.3871).toFixed(3);
+            Cubic_centimetres.value = (iValue.value * 16.3871).toFixed(3);
+            Cubic_metres.value = (iValue.value / 61023.7).toFixed(8);
+            Cubic_feet.value = (iValue.value * 0.000578704).toFixed(7);
+            UK_gallon.value = (iValue.value * 0.000143945).toFixed(6);
+            US_gallon.value = (iValue.value * 0.000172052).toFixed(6);
+        }
+        else if (Si.value == "Cubic_feet") {
+            Cubic_feet.value = Math.round(iValue.value).toFixed(2);
+            litre.value = (iValue.value * 28.3168).toFixed(3);
+            mlitre.value = (iValue.value * 28316.8).toFixed(3);
+            Cubic_centimetres.value = (iValue.value * 28316.8).toFixed(3);
+            Cubic_metres.value = (iValue.value / 35.3147).toFixed(6);
+            Cubic_inches.value = (iValue.value * 1728).toFixed(2);
+            UK_gallon.value = (iValue.value * 0.133681).toFixed(3);
+            US_gallon.value = (iValue.value * 0.160543).toFixed(3);
+        }
+    }
+</script>
+
+</html>

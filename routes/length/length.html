@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../../Assets/logo.jpg"/>
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <title>Convert Length</title>
+  </head>
+  <body>
+    <div class="mainBody">
+      <!-- navabar starts -->
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../../index.html">
+            <img class="logo" src="../../Assets/logo.jpg" alt="" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <li class="nav-item">
+                  <a class="nav-link" href="../volume/volume.html"
+                    >Volume</a
+                  >
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../temperature/temp.html"
+                  >Temperature</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Length</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- navabar ends -->
+
+      <!-- body starts -->
+      <div class="container-fluid flex flex-column">
+        <h2>Length Converter</h2>
+        <div class="container flex flex-column gap-3 mt-3">
+          <div class="inputArea">
+            <form action="#">
+              <select name="values" id="values">
+                <option value="#">Select the unit</option>
+                <option value="NMiles">Naut. Miles</option>
+                <option value="Kilometer">Kilometer</option>
+                <option value="meter">Meter</option>
+                <option value="feet">feet</option>
+                <option value="Yard">Yard</option>
+                <option value="inch">inch</option>
+                <option value="cm">cm</option>
+                <option value="mm">mm</option>
+              </select>
+              <input type="number" placeholder="Enter the Value" min="1" id="ivalue" oninput="getValue()"/>
+            </div>
+            <!-- <button class="btn btn-outline-primary" id="cBtn">Convert</button> -->
+          </form>
+        </div>
+        <div class="conValues flex flex-column gap-3 mt-3 colo py-3 px-5">
+          <div class="nMiles comConv flex">
+            <label for="nMiles">Naut. Miles :</label>
+            <input type="number" id="nMiles" readonly value="0">
+          </div>
+          <div class="km comConv flex">
+            <label for="km">KiloMeter :</label>
+            <input type="number" id="km" value="0" readonly>
+          </div>
+          <div class="meter comConv flex">
+            <label for="meter">meter :</label>
+            <input type="number" id="meter" value="0" readonly>
+          </div>
+          <div class="feet comConv flex">
+            <label for="feet">feet :</label>
+            <input type="number" id="feet" value="0" readonly>
+          </div>
+          <div class="yard comConv flex">
+            <label for="yard">yard :</label>
+            <input type="number" id="yard" value="0" readonly>
+          </div>
+          <div class="inch comConv flex">
+            <label for="inch">inch :</label>
+            <input type="number" id="inch" value="0" readonly>
+          </div>
+          <div class="cm comConv flex">
+            <label for="cm">cm :</label>
+            <input type="number" id="cm" value="0" readonly>
+          </div>
+          <div class="mm comConv flex">
+            <label for="mm">mm :</label>
+            <input type="number" id="mm" value="0" readonly>
+          </div>        
+        </div>
+      </div>
+      <!-- body ends -->
+
+      
+    </div>
+  </body>
+  <!-- <script src="../../js/index.js"></script> -->
+  <script>
+    // for length calculations
+let btn=document.getElementById("cBtn");
+    let Si=document.getElementById("values");
+    let iValue=document.querySelector('#ivalue');
+    let cm=document.querySelector('#cm');
+    let mm=document.querySelector('#mm');
+    let feet=document.querySelector('#feet');
+    let inch=document.querySelector('#inch');
+    let yard=document.querySelector('#yard');
+    let meter=document.querySelector('#meter');
+    let km=document.querySelector('#km');
+    let nMiles=document.querySelector('#nMiles');
+    
+      function getValue(){
+      if(Si.value=="cm"){
+       cm.value= Math.round(iValue.value).toFixed(2);
+       mm.value=(iValue.value*10).toFixed(3);
+       feet.value=(iValue.value/30.48).toFixed(3);
+       inch.value=(iValue.value/2.54).toFixed(3);
+       yard.value=(iValue.value/91.4).toFixed(3);
+       meter.value=(iValue.value/100).toFixed(2);
+       km.value=(iValue.value/100000).toFixed(6);
+       nMiles.value=(iValue.value/185200).toFixed(7);
+      }
+      else if(Si.value=="NMiles"){
+       nMiles.value= Math.round(iValue.value).toFixed(2);
+       mm.value=(iValue.value*1852000).toFixed(2)
+       feet.value=(iValue.value*6075).toFixed(2)
+       inch.value=(iValue.value*72910).toFixed(2)
+       yard.value=(iValue.value*2025).toFixed(2)
+       meter.value=(iValue.value*1852).toFixed(2)
+       km.value=(iValue.value*1.852).toFixed(4)
+       cm.value=(iValue.value*185200).toFixed(3)
+      }
+      else if(Si.value=="Kilometer"){
+       km.value= Math.round(iValue.value).toFixed(2);
+       mm.value=(iValue.value*1000000).toFixed(3)
+       feet.value=(iValue.value*3281).toFixed(3)
+       inch.value=(iValue.value*39370).toFixed(3)
+       yard.value=(iValue.value*1094).toFixed(3)
+       meter.value=(iValue.value*1000).toFixed(3)
+       nMiles.value=(iValue.value/1.852).toFixed(3);
+       cm.value=(iValue.value*100000).toFixed(3)
+      }
+      else if(Si.value=="meter"){
+       meter.value= Math.round(iValue.value).toFixed(2);
+       mm.value=(iValue.value*1000).toFixed(3)
+       feet.value=(iValue.value*3.281).toFixed(3)
+       inch.value=(iValue.value*39.37).toFixed(3)
+       yard.value=(iValue.value*1.094).toFixed(3)
+       nMiles.value=(iValue.value/1852).toFixed(6)
+       km.value=(iValue.value/1000).toFixed(6)
+       cm.value=(iValue.value*100).toFixed(3)
+      }
+      else if(Si.value=="feet"){
+       feet.value= Math.round(iValue.value).toFixed(2);
+       mm.value=(iValue.value*304.8).toFixed(4)
+       nMiles.value=(iValue.value/6076).toFixed(4)
+       inch.value=(iValue.value*12).toFixed(4)
+       yard.value=(iValue.value/3).toFixed(4)
+       meter.value=(iValue.value*3.821).toFixed(4)
+       km.value=(iValue.value/3281).toFixed(6)
+       cm.value=(iValue.value*30.48).toFixed(4)
+      }
+      else if(Si.value=="Yard"){
+       yard.value= Math.round(iValue.value).toFixed(2);
+       mm.value=(iValue.value*914.4).toFixed(3)
+       feet.value=(iValue.value*3).toFixed(2)
+       inch.value=(iValue.value*36).toFixed(3)
+       nMiles.value=(iValue.value/2025).toFixed(6)
+       meter.value=(iValue.value/1.094).toFixed(3)
+       km.value=(iValue.value/1094).toFixed(6)
+       cm.value=(iValue.value*91.44).toFixed(4)
+      }
+      else if(Si.value=="inch"){
+       inch.value= Math.round(iValue.value).toFixed(2);
+       mm.value=(iValue.value*25.4).toFixed(3)
+       feet.value=(iValue.value/12).toFixed(2)
+       yard.value=(iValue.value/36).toFixed(3)
+       nMiles.value=(iValue.value/72910).toFixed(6)
+       meter.value=(iValue.value/39.37).toFixed(3)
+       km.value=(iValue.value/39370).toFixed(6)
+       cm.value=(iValue.value*2.54).toFixed(4)
+      }
+      else if(Si.value=="mm"){
+       mm.value= Math.round(iValue.value).toFixed(2);
+       nMiles.value=(iValue.value/1.852e+6).toFixed(6)
+       feet.value=(iValue.value/304.8).toFixed(4)
+       inch.value=(iValue.value/25.4).toFixed(4)
+       yard.value=(iValue.value/914.4).toFixed(6)
+       meter.value=(iValue.value/1000).toFixed(4)
+       km.value=(iValue.value/1e+6).toFixed(6)
+       cm.value=(iValue.value/10).toFixed(4)
+      }
+    }
+  </script>
+</html>
